@@ -33,6 +33,12 @@ const questions = [
 ];
 
 export default function QuizGame() {
+
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+  const [selectedAnswer, setSelectedAnswer] = useState('');
+  const [score, setScore] = useState(0);
+  const [quizCompleted, setQuizCompleted] = useState(false);
+  
   return (
       <div> 
           <h1>Quiz Game</h1>
