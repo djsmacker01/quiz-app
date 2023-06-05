@@ -33,15 +33,20 @@ const questions = [
 ];
 
 export default function QuizGame() {
-
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-  const [selectedAnswer, setSelectedAnswer] = useState('');
+  const [selectedAnswer, setSelectedAnswer] = useState("");
   const [score, setScore] = useState(0);
   const [quizCompleted, setQuizCompleted] = useState(false);
-  
+
+  // effect hook to check if quiz is completed (i.e. current question index is equal to the length of the questions array)
+  useEffect(() => {
+    if (currentQuestionIndex === questions.length) {
+      setQuizCompleted(true);
+   }
+ },[currentQuestionIndex])
   return (
-      <div> 
-          <h1>Quiz Game</h1>
+    <div>
+      <h1>Quiz Game</h1>
     </div>
-  )
+  );
 }
