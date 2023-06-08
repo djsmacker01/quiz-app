@@ -51,6 +51,20 @@ export default function QuizGame() {
   }
 
   // function that handle moving to next question
+  const handleNextQuestion = () => {
+    if (selectedAnswer===questions[currentQuestionIndex].answer) {
+    setScore(score + 1); // increment score if selected answer is correct
+    }
+  }
+
+  if (currentQuestionIndex === questions.length - 1) {
+    setCurrentQuestionIndex(currentQuestionIndex);
+    setQuizCompleted(true);
+  }
+  else {
+    setCurrentQuestionIndex(currentQuestionIndex + 1)
+    setSelectedAnswer('');
+  }
   
   return (
     <div>
