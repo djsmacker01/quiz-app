@@ -1,4 +1,5 @@
-import React,{useState,useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
+import styles from '../Components/QuizGame.scss'
 
 // Array of object containing each quiz questions
 const questions = [
@@ -52,23 +53,53 @@ export default function QuizGame() {
 
   // function that handle moving to next question
   const handleNextQuestion = () => {
-    if (selectedAnswer===questions[currentQuestionIndex].answer) {
-    setScore(score + 1); // increment score if selected answer is correct
+    if (selectedAnswer === questions[currentQuestionIndex].answer) {
+      setScore(score + 1); // increment score if selected answer is correct
     }
-  }
-
-  if (currentQuestionIndex === questions.length - 1) {
-    setCurrentQuestionIndex(currentQuestionIndex);
-    setQuizCompleted(true);
-  }
-  else {
-    setCurrentQuestionIndex(currentQuestionIndex + 1)
-    setSelectedAnswer('');
-  }
   
+
+    if (currentQuestionIndex === questions.length - 1) {
+      setCurrentQuestionIndex(currentQuestionIndex);
+      setQuizCompleted(true);
+    }
+    else {
+      setCurrentQuestionIndex(currentQuestionIndex + 1)
+      setSelectedAnswer('');
+    }
+  };
+
+  // get the current question object based on the current question index
+  const currentQuestion = questions[currentQuestionIndex];
+
   return (
-    <div>
-      <h1>Quiz Game</h1>
+    <div className={styles.quiz}>
+      {!quizCompleted ? (
+        <>
+          <h2>Question {currentQuestion.id}</h2>
+          <p>{currentQuestion.question}</p>
+          
+          <ul>
+            {currentQuestion.options.map((option) => (
+              <li key={option}>
+                <label>
+                  <input
+                    type="radio"
+                    value={option}
+                    checked={selectedAnswer === option}
+                    onChange={()=> handleAnswerChange(option)}
+                  />
+                  {option}
+               </label>
+              </li>
+            ))}
+          </ul>
+          <button onClick={handleNextQuestion}>{currentQuestionIndex === questions.length - 1 ? 'Finish' : 'Next'  }</button>
+        </>
+      ) : (
+          <QuizResults score={ score} totalQuestions={questions.length} />
+      )
+        
+     }
     </div>
   );
 }
