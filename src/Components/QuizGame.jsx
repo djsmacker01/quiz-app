@@ -44,6 +44,14 @@ export default function QuizGame() {
       setQuizCompleted(true);
    }
  },[currentQuestionIndex])
+
+  //Function to handle user selection of an answer option
+  const handleAnswerSelection = (option) => {
+    setSelectedAnswer(option);
+  }
+
+  // function that handle moving to next question
+  
   return (
     <div>
       <h1>Quiz Game</h1>
