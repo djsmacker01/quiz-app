@@ -35,6 +35,7 @@ const questions = [
 ];
 
 export default function QuizGame() {
+
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState("");
   const [score, setScore] = useState(0);
@@ -44,8 +45,8 @@ export default function QuizGame() {
   useEffect(() => {
     if (currentQuestionIndex === questions.length) {
       setQuizCompleted(true);
-   }
- },[currentQuestionIndex])
+    }
+  }, [currentQuestionIndex]);
 
   //Function to handle user selection of an answer option
   const handleAnswerSelection = (option) => {
